@@ -2,55 +2,37 @@
 
 
 
-A secure and decentralized system for managing healthcare data using blockchain technology. This project ensures data integrity, privacy, and controlled access to sensitive patient information.
-
-
-
-\---
+A secure and decentralized system for managing healthcare data using blockchain technology.
 
 
 
 \## 🔍 Features
 
+\- Secure storage of patient records  
 
+\- Tamper-proof data using blockchain  
 
-\- 🔐 Secure storage of patient records  
-
-\- 🧾 Tamper-proof data using blockchain  
-
-\- 🌐 Decentralized data management  
-
-\- 👥 Controlled access to authorized users  
-
-
-
-\---
+\- Decentralized system  
 
 
 
 \## 🛠️ Technologies Used
 
-
-
 \- Python  
 
-\- Blockchain Concepts  
-
-\- (Add Flask / HTML / CSS if used)
-
-
-
-\---
+\- Blockchain  
 
 
 
 \## 🚀 How to Run
 
+1\. Clone the repo  
+
+2\. Run the main file  
 
 
-1\. Clone the repository:
 
-&#x20;  ```bash
+\## 👩‍💻 Author
 
-&#x20;  git clone https://github.com/manyas-developer/healthcare-blockchain.git
+Manya
 
