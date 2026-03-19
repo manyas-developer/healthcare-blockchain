@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Performance Graphs</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f4f6f8;
+            text-align: center;
+        }
+
+        img {
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📊 Performance Evaluation Graphs</h1>
+
+<h2>Batch Size vs Latency</h2>
+<img src="{{ url_for('static', filename='batch_graph.png') }}" width="500">
+
+<h2>Streaming Interval vs Latency</h2>
+<img src="{{ url_for('static', filename='sleep_graph.png') }}" width="500">
+
+<h2>PBFT Nodes vs Latency</h2>
+<img src="{{ url_for('static', filename='node_graph.png') }}" width="500">
+
+<h2>PBFT Nodes vs Throughput</h2>
+<img src="{{ url_for('static', filename='throughput_graph.png') }}" width="500">
+
+<br><br>
+<a href="/"><button>Back to Dashboard</button></a>
+
+</body>
+</html>

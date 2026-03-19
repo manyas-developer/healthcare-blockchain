@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare Blockchain Enterprise Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #eef2f7;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .primary { background:#007bff; }
+        .danger { background:red; }
+        .success { background:green; }
+        .warning { background:orange; }
+
+        .valid { color:green; font-weight:bold; }
+        .invalid { color:red; font-weight:bold; }
+
+        .node-failed { color:red; font-weight:bold; }
+        .node-malicious { color:orange; font-weight:bold; }
+
+        @keyframes flash {
+            0% { background-color: #ffe6e6; }
+            50% { background-color: #ff0000; color:white; }
+            100% { background-color: #ffe6e6; }
+        }
+
+        .attack {
+            padding: 5px 10px;
+            border-radius: 5px;
+            animation: flash 1s infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>🏥 Healthcare Blockchain Enterprise Monitor</h1>
+
+<!-- Integrity -->
+<div class="card">
+    <h3>Blockchain Integrity:
+        {% if chain_valid %}
+            <span class="valid">VALID ✅</span>
+        {% else %}
+            <span class="invalid attack">UNDER ATTACK ❌</span>
+        {% endif %}
+    </h3>
+</div>
+
+<!-- Performance -->
+<div class="card">
+    <h3>Total Blocks in Chain: {{ blocks }}</h3>
+    <h3>Total Processed Blocks: {{ total_blocks }}</h3>
+    <h3>Active Nodes: {{ node_count }}</h3>
+    <h3>Latency: {{ latency }} sec</h3>
+    <h3>Throughput: {{ throughput }} blocks/sec</h3>
+</div>
+
+<!-- Node Activity -->
+<div class="card">
+    <h3>Node Activity (Last Consensus)</h3>
+
+    {% if failed_nodes %}
+        <p class="node-failed">❌ Failed Nodes: {{ failed_nodes }}</p>
+    {% else %}
+        <p>✔ No Node Failures</p>
+    {% endif %}
+
+    {% if malicious_nodes %}
+        <p class="node-malicious">⚠ Malicious Nodes: {{ malicious_nodes }}</p>
+    {% else %}
+        <p>✔ No Malicious Activity</p>
+    {% endif %}
+</div>
+
+<!-- Latest Records -->
+<div class="card">
+    <h3>Latest Patient Records</h3>
+    {% if records %}
+        <ul>
+            {% for r in records %}
+                <li>
+                    Patient {{ r.patient_id }} |
+                    HR {{ r.heart_rate }} |
+                    BP {{ r.bp }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No streaming data yet.</p>
+    {% endif %}
+</div>
+
+<!-- Run Streaming -->
+<div class="card">
+    <form method="POST" action="/run">
+        <label><strong>Batch Size:</strong></label>
+        <input type="number" name="batch_size" min="1" value="5">
+        <button class="primary">Run Streaming</button>
+    </form>
+</div>
+
+<!-- Tamper Simulation -->
+<div class="card">
+    <h3>🔴 Tamper Simulation</h3>
+
+    <form method="POST" action="/tamper">
+        <label><strong>Select Tamper Type:</strong></label><br><br>
+
+        <select name="tamper_type">
+            <option value="random">Random Block</option>
+            <option value="specific">Specific Block</option>
+        </select>
+
+        <br><br>
+
+        <label>Block Number (for specific):</label>
+        <input type="number" name="block_number" min="1">
+
+        <br><br>
+
+        <button class="danger">Execute Tamper</button>
+    </form>
+</div>
+
+<!-- Control Buttons -->
+<div>
+    <a href="/repair"><button class="success">Repair Blockchain</button></a>
+    <a href="/chain"><button class="warning">View Chain</button></a>
+    <a href="/graphs"><button class="primary">View Graphs</button></a>
+</div>
+
+</body>
+</html>

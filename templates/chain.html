@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Viewer</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f4f6f8;
+        }
+
+        .block {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .invalid {
+            background: #ffe6e6;
+            border: 2px solid red;
+        }
+
+        .visual-chain {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .visual-block {
+            min-width: 120px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .valid-block {
+            background: #cce5ff;
+        }
+
+        .invalid-block {
+            background: #ff9999;
+        }
+
+        .hash-box {
+            font-size: 12px;
+            word-break: break-all;
+            background: #eef2f7;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .mismatch {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>📦 Blockchain Ledger</h1>
+
+<h2>Chain Visualization</h2>
+<div class="visual-chain">
+{% for block in chain %}
+    <div class="visual-block {% if block.index in invalid_blocks %}invalid-block{% else %}valid-block{% endif %}">
+        Block {{ block.index }}
+    </div>
+{% endfor %}
+</div>
+
+{% for block in chain %}
+<div class="block {% if block.index in invalid_blocks %}invalid{% endif %}">
+    
+    <h3>Block {{ block.index }}</h3>
+
+    <p><strong>Previous Hash:</strong></p>
+    <div class="hash-box">
+        {{ block.previous_hash }}
+    </div>
+
+    <p><strong>Stored Hash:</strong></p>
+    <div class="hash-box">
+        {{ comparison[block.index]['stored'] }}
+    </div>
+
+    <p><strong>Recalculated Hash:</strong></p>
+    <div class="hash-box">
+        {{ comparison[block.index]['recalculated'] }}
+    </div>
+
+    {% if comparison[block.index]['stored'] != comparison[block.index]['recalculated'] %}
+        <p class="mismatch">⚠ SELF HASH MISMATCH DETECTED</p>
+    {% endif %}
+
+    {% if block.index > 0 and block.previous_hash != chain[block.index-1].hash %}
+        <p class="mismatch">⚠ PREVIOUS HASH LINK BROKEN</p>
+    {% endif %}
+
+    {% if field_changes[block.index] %}
+        <h4>Changed Fields:</h4>
+        <ul>
+        {% for change in field_changes[block.index] %}
+            <li>
+                Field: {{ change.field }} |
+                Old: {{ change.old }} |
+                New: {{ change.new }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p><strong>Data:</strong></p>
+    <div class="hash-box">
+        {{ block.data }}
+    </div>
+
+</div>
+{% endfor %}
+
+<a href="/"><button>Back to Dashboard</button></a>
+
+</body>
+</html>
