@@ -1,38 +1,56 @@
-\# Healthcare Blockchain System
+\# 🏥 Healthcare Blockchain System
 
 
 
-This project focuses on securing healthcare data using blockchain technology to ensure privacy, transparency, and integrity.
+A secure and decentralized system for managing healthcare data using blockchain technology. This project ensures data integrity, privacy, and controlled access to sensitive patient information.
 
 
 
-\## Features
-
-\- Secure storage of patient data
-
-\- Tamper-proof records using blockchain
-
-\- Decentralized access control
+\---
 
 
 
-\## Technologies Used
-
-\- Python / Web
-
-\- Blockchain concepts
+\## 🔍 Features
 
 
 
-\## How to Run
+\- 🔐 Secure storage of patient records  
 
-1\. Clone the repository
+\- 🧾 Tamper-proof data using blockchain  
 
-2\. Run the main file
+\- 🌐 Decentralized data management  
+
+\- 👥 Controlled access to authorized users  
 
 
 
-\## Author
+\---
 
-Manya
+
+
+\## 🛠️ Technologies Used
+
+
+
+\- Python  
+
+\- Blockchain Concepts  
+
+\- (Add Flask / HTML / CSS if used)
+
+
+
+\---
+
+
+
+\## 🚀 How to Run
+
+
+
+1\. Clone the repository:
+
+&#x20;  ```bash
+
+&#x20;  git clone https://github.com/manyas-developer/healthcare-blockchain.git
 
